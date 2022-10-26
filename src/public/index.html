@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>JSON Formatter</title>
+  <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+</head>
+
+<body>
+  <script src="wasm_exec.js"></script>
+  <script src="load_wasm.js"></script>
+  <script>
+    loadWasm("main.wasm")
+      .catch((error) => {
+        console.error(error);
+      });
+  </script>
+  <div id="main">
+    <h1 id="title">JSON Formatter</h1>
+    <div id="container">
+      <div class="area">
+        <label for="input">Raw JSON</label>
+        <textarea id="input" name="input" onfocus="editionMode(this)" oninput="format(this)"></textarea>
+      </div>
+      <div id="control-wrapper">
+        <select id="indent-selector" onchange="format(globalThis.document.getElementById('input'))">
+          <option value="2" selected>2 space</option>
+          <option value="3">3 space</option>
+          <option value="4">4 space</option>
+        </select>
+      </div>
+      <div class="area">
+        <label for="output">Formatted JSON</label>
+        <textarea id="output" name="output" readonly="true"></textarea>
+      </div>
+  </div>
+  </div>
+</body>
+
+</html>
